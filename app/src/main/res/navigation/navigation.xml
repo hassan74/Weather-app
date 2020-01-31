@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/localWeatherListFragment">
+
+    <fragment
+        android:id="@+id/localWeatherListFragment"
+        android:name="com.task.task.localweatherlist.presentation.WeatherListFragment"
+        android:label="LocalWeatherListFragment" >
+        <action
+            android:id="@+id/action_localWeatherListFragment_to_remoteWeatherFragment"
+            app:destination="@id/currentWeatherFragment" />
+        <action
+            android:id="@+id/action_localWeatherListFragment_to_currentWeatherFragment"
+            app:destination="@id/currentWeatherFragment" />
+        <action
+            android:id="@+id/action_localWeatherListFragment_to_currentWeatherFragment2"
+            app:destination="@id/currentWeatherFragment" />
+        <action
+            android:id="@+id/action_localWeatherListFragment_to_weatherDetailsFragment"
+            app:destination="@id/weatherDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/currentWeatherFragment"
+        android:name="com.task.task.currentwheather.presentation.CurrentWeatherFragment"
+        android:label="CurrentWeatherFragment" />
+    <fragment
+        android:id="@+id/weatherDetailsFragment"
+        android:name="com.task.task.weatherdetails.WeatherDetailsFragment"
+        android:label="WeatherDetailsFragment" >
+        <argument
+            android:name="weathertKey"
+            app:argType="com.task.task.database.Weather" />
+    </fragment>
+</navigation>
