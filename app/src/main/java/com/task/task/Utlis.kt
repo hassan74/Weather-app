@@ -1,5 +1,6 @@
 package com.task.task
 
+import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
 import kotlin.math.round
 
@@ -8,6 +9,7 @@ fun Double.convertKelvinToCelsius(
     return (this-273.15).round(3).toString()+"°C"
 }
 
+@SuppressLint("SimpleDateFormat")
 fun Long.convertLongToDateString(
 ): String {
     return SimpleDateFormat("EEEE MMM-dd-yyyy' Time: 'HH:mm")

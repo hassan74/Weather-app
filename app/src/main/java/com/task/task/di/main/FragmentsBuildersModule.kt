@@ -1,4 +1,4 @@
-package com.task.task.di
+package com.task.task.di.main
 
 import com.task.task.localweatherlist.presentation.WeatherListFragment
 import com.task.task.currentwheather.presentation.CurrentWeatherFragment

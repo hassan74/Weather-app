@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="Temprature"
+            android:text="@string/temp"
             android:textColor="@android:color/white"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="27C"
+            tools:text="27C"
             android:textColor="@android:color/white"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -72,15 +72,15 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:text="Pressure"
 
+            android:text="@string/pressure"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/pressure_textview"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/min_temp_title_textview" />
+            app:layout_constraintTop_toBottomOf="@+id/temp_barrier" />
 
         <TextView
             android:id="@+id/pressure_textview"
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:text="0"
+            tools:text="0"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/pressure_title_textview"
@@ -104,19 +104,19 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:text="humidity"
+            android:text="@string/humidity"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/humidity_textview"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/pressure_textview"
-            app:layout_constraintTop_toBottomOf="@+id/max_temp_title_textview" />
+            app:layout_constraintTop_toBottomOf="@+id/temp_barrier" />
 
         <TextView
             android:id="@+id/humidity_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
+            tools:text="0"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/humidity_title_textview"
@@ -136,7 +136,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/ic_button_background"
-            android:text="save"
+            android:text="@string/save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -166,7 +166,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:text="Min Temp:"
+            android:text="@string/min_temp"
             android:textColor="@android:color/white"
             app:layout_constraintEnd_toStartOf="@+id/min_temp_textview"
             app:layout_constraintHorizontal_bias="0.5"
@@ -181,7 +181,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:text="2900C"
+            tools:text="2900C"
             android:textColor="@android:color/white"
             app:layout_constraintEnd_toStartOf="@+id/max_temp_title_textview"
             app:layout_constraintHorizontal_bias="0.5"
@@ -195,7 +195,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:text="Max Temp"
+            android:text="@string/max_temp"
             android:textColor="@android:color/white"
             app:layout_constraintEnd_toStartOf="@+id/max_temp_textview"
             app:layout_constraintHorizontal_bias="0.5"
@@ -207,18 +207,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="000C"
+            tools:text="000C"
             android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/max_temp_title_textview"
             app:layout_constraintTop_toBottomOf="@+id/temp_textview" />
 
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/temp_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="max_temp_textview,min_temp_title_textview,min_temp_textview,max_temp_title_textview"
+            tools:layout_editor_absoluteY="731dp" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/temp_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="temp_textview ,temp_title_textview  ,max_temp_title_textview ,max_temp_textview,min_temp_title_textview ,min_temp_textview "
+            tools:ignore="MissingConstraints" />
+
         <androidx.constraintlayout.widget.Group
             android:id="@+id/weatehr_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             app:constraint_referenced_ids="save_button,humidity_textview ,humidity_title_textview ,temp_textview ,temp_title_textview ,pressure_textview,pressure_title_textview ,max_temp_title_textview ,max_temp_textview,min_temp_title_textview ,min_temp_textview "
             tools:ignore="MissingConstraints" />
 

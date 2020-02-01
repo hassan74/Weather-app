@@ -15,14 +15,13 @@ import com.task.task.currentwheather.domain.CurrentWeatherUseCase
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
-class   AppModule {
-//    @Singleton
-
-
-//    @Singleton
+class  AppModule {
+    @Singleton
     @Provides
     fun provideWeatherDao(application: Application): WeatherDao {
         var db = Room.databaseBuilder(
@@ -32,62 +31,18 @@ class   AppModule {
         return db.weatherDao()
     }
 
-//    @Singleton
-//    @Provides
-//    fun getTestring() = "Test string"
-
+    @Singleton
     @Provides
     fun provideRetrofitInstance(): Retrofit {
         var retrofit = Retrofit.Builder()
             .baseUrl("https://api.openweathermap.org/data/2.5/")
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         return retrofit
     }
-    //-----------------
-    @Provides
-    fun provideWeatherListUseCase(weatherListRepository: IWeatherListRepository): WeatherListUseCase {
-        var weatherListUseCase= WeatherListUseCase(weatherListRepository)
-        return weatherListUseCase
-    }
-    @Provides
-    fun provideWeatherListRepository(weatherListLocalDataSource: IWeatherListLocalDataSource): IWeatherListRepository {
-        var weatherListRepository:IWeatherListRepository =WeatherListRepository(weatherListLocalDataSource)
-        return weatherListRepository
-    }
-    @Provides
-    fun PorvideWeatherListLocalDataSource(weatherDao: WeatherDao): IWeatherListLocalDataSource {
-        var weatherLocalDataSource:IWeatherListLocalDataSource=WeatherListLocalDataSource(weatherDao)
-        return weatherLocalDataSource
-    }
-    //-----------------
-    @Provides
-    fun provideWeatherService(retrofit :Retrofit):WeatherService{
-        val weatherService:WeatherService by lazy {retrofit.create(WeatherService::class.java)}
-        return weatherService
-        //var weatherService:WeatherService =retrofit.create(WeatherService::class.java)
-        }
 
-    @Provides
-    fun provideCurrentWeatherLocalDataSource(weatherDao: WeatherDao): ICurrentWeatherLocalDataSource {
-        var currentWeatherLocalDataSource :ICurrentWeatherLocalDataSource =CurrentWeatherLocalDataSource(weatherDao)
-        return currentWeatherLocalDataSource
-    }
-    @Provides
-    fun provideCurrentWeatherRemoteDataSource(weatherService: WeatherService): ICurrentWeatherRemoteDataSource {
-        var currentWeatherRemoteDataSource:ICurrentWeatherRemoteDataSource =CurrentWeatherRemoteDataSource(weatherService)
-        return currentWeatherRemoteDataSource
-    }
-    @Provides
-    fun provideCurrentWeatherRepository(currentWeatherRemoteDataSource: ICurrentWeatherRemoteDataSource ,currentWeatherLocalDataSource: ICurrentWeatherLocalDataSource) : ICurrentWeatherRepository {
-        var currentWeaterRepository:ICurrentWeatherRepository =CurrentWeaterRepository(currentWeatherRemoteDataSource ,currentWeatherLocalDataSource)
-        return currentWeaterRepository
-    }
-    @Provides
-    fun provideCurrentWeatherUseCase(currentWeaterRepository :ICurrentWeatherRepository): CurrentWeatherUseCase {
-        return CurrentWeatherUseCase(currentWeaterRepository )
-    }
 
 
 }

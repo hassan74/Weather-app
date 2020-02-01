@@ -17,6 +17,6 @@ data class Weather(
     @ColumnInfo(name = "pressure")var pressure: Int,
     @ColumnInfo(name = "humidity")var humidity: Int ,
     @ColumnInfo(name = "countery")var countery:String?,
-    @ColumnInfo(name = "date")var date:Long=System.currentTimeMillis()
+    @ColumnInfo(name = "date")var date:Long
 
 ):Serializable

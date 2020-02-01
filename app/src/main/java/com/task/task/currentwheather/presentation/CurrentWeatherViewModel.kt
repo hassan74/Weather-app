@@ -6,6 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.task.task.database.Weather
 import com.task.task.currentwheather.domain.CurrentWeatherUseCase
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -47,7 +50,7 @@ class CurrentWeatherViewModel @Inject constructor(
 
      fun getWeather(counteryId:String){
          coroutineScope.launch {
-             var weathers =currentWeatherUseCase.getWeather(counteryId ,key)
+             var weathers =currentWeatherUseCase.getWeatherCoroutines(counteryId ,key)
              try {
                  _status.value= WeatherApiStatus.LOADING
                  //var result=getWeathers.await()
@@ -55,12 +58,40 @@ class CurrentWeatherViewModel @Inject constructor(
                  _status.value= WeatherApiStatus.DONE
                  weather=result.main
                  weather?.countery=counteryId
+                 weather?.date=System.currentTimeMillis()
                  _weatherLiveData.value=weather
              }catch (e:Exception){
                  _status.value= WeatherApiStatus.ERROR
+                 TODO("handle error status - use interceptor")
+
              }
          }
 
+
+    }
+    fun getWeatherRxJava(counteryId:String){
+        val compositeDisposable = CompositeDisposable()
+        compositeDisposable.add(
+            currentWeatherUseCase.getWeatherRxJava(counteryId ,key)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    it.let{weathers->
+                        _status.value= WeatherApiStatus.LOADING
+                        //var result=getWeathers.await()
+                        var result=weathers
+                        _status.value= WeatherApiStatus.DONE
+                        weather=result.main
+                        weather?.countery=counteryId
+                        weather?.date=System.currentTimeMillis()
+                        _weatherLiveData.value=weather
+                    }
+                },{
+                    _status.value= WeatherApiStatus.ERROR
+                    TODO("handle error status /use interceptor")
+
+                })
+        )
 
     }
 }

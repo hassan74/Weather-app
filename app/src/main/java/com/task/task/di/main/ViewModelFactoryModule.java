@@ -1,4 +1,4 @@
-package com.task.task.di;
+package com.task.task.di.main;
 
 import androidx.lifecycle.ViewModelProvider;
 

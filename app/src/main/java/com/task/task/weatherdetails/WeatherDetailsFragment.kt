@@ -20,7 +20,6 @@ class WeatherDetailsFragment : Fragment() {
     ): View? {
         var binding : FragmentWeatherDetailsBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_weather_details, container, false)
-        Log.e("sdfsd" ,"sdf")
         var weather: Weather? = arguments?.get("weathertKey") as Weather?
         weather?.let{
             binding.titleTextview.setText(it.countery)

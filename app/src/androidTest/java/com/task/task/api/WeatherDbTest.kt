@@ -13,10 +13,12 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import javax.inject.Inject
 
 @RunWith(AndroidJUnit4::class)
 class WeatherDbTest {
-    private lateinit var weatherDao: WeatherDao
+    @Inject
+      private lateinit var weatherDao: WeatherDao
     private lateinit var db: AppDatabase
     @Before
     fun befor(){
@@ -29,8 +31,8 @@ class WeatherDbTest {
             .build()
     }
     @Test
-    fun test(){
-        var weather=Weather(0,1.0,1.0,1.0,1,1,"","")
+    fun testInserAndGetFromtDataBase(){
+        var weather=Weather(0,1.0,1.0,1.0,1,1,"",0)
             weatherDao.insertAll(weather)
 
         Assert.assertEquals(weather.pressure ,weatherDao.getAll().value?.get(0)?.pressure)

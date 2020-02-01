@@ -39,7 +39,7 @@ class CurrentWeatherFragment : DaggerFragment() {
             ) {
                 binding.weatehrView.visibility=View.GONE
                 binding.progressBar.visibility = View.VISIBLE
-                currentWeatherViewModel.getWeather(parent?.getItemAtPosition(position).toString())
+                currentWeatherViewModel.getWeatherRxJava(parent?.getItemAtPosition(position).toString())
             }
 
         }

@@ -5,6 +5,14 @@
     <string name="weather_saved">Weather saved sucessfully</string>
     <string name="str_get_current_weather">Get current weather</string>
     <string name="all_saved_weather">All saved weatehr</string>
+    <string name="humidity">humidity</string>
+    <string name="pressure">Pressure</string>
+    <string name="temp">Temp:</string>
+    <string name="min_temp">Min Temp:</string>
+    <string name="max_temp">Max Temp</string>
+    <string name="save">save</string>
+    <string name="maore_details">More details</string>
+    <string name="date">Date:</string>
     <string-array name="cities">
         <item>London</item>
         <item>Cairo</item>
